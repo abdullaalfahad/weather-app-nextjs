@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { WeatherHeader } from "@/components/weather-header";
+import { WeatherSearch } from "@/components/weather-search";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="flex flex-col justify-center min-h-screen bg-gradient-to-br from-zinc-900 via-purple-900 to-zinc-900">
+          <WeatherHeader />
+          <WeatherSearch />
+          {children}
+        </div>
       </body>
     </html>
   );

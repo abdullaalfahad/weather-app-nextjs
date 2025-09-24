@@ -1,6 +1,8 @@
 // hooks/useWeatherSearch.js
 import { useState } from "react";
 
+const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY;
+
 export const useWeatherSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -13,7 +15,7 @@ export const useWeatherSearch = () => {
 
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=9d729cfd40c256defac28e6a8266b774&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=${API_KEY}&units=metric`
       );
 
       if (!response.ok) {

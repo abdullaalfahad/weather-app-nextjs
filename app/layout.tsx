@@ -31,7 +31,6 @@ export default function RootLayout({
       >
         <div className="flex flex-col justify-center min-h-screen bg-gradient-to-br from-zinc-900 via-purple-900 to-zinc-900">
           <WeatherHeader />
-          <WeatherSearch />
           {children}
         </div>
       </body>

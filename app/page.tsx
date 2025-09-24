@@ -1,3 +1,5 @@
+import { WeatherSearch } from "@/components/weather-search";
+
 export default function Home() {
-  return <div></div>;
+  return <WeatherSearch />;
 }

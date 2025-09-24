@@ -50,6 +50,15 @@ export function WeatherSearch() {
         </div>
 
         {error && <p className="text-red-300 text-sm">{error}</p>}
+
+        {!error && (
+          <div className="pt-16">
+            <Search className="w-12 h-12 text-black mx-auto mb-4" />
+            <p className="text-white/60 text-center text-sm">
+              Search for a city to see weather information
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -6,44 +6,71 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useWeatherSearch } from "@/hooks/use-weather-search";
+import { useCityAutocomplete } from "@/hooks/use-city-autocomplete";
 
 export function WeatherSearch() {
   const [searchQuery, setSearchQuery] = useState("");
   const { loading, error, searchWeather } = useWeatherSearch();
+  const { suggestions, fetchSuggestions, setSuggestions } =
+    useCityAutocomplete();
   const router = useRouter();
-
   const pathName = usePathname();
 
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+  const handleSearch = async (city?: string) => {
+    setSuggestions([]);
+    const query = city || searchQuery;
+    if (!query.trim()) return;
 
-    const data = await searchWeather(searchQuery);
+    const data = await searchWeather(query);
 
     if (data) {
-      router.push(`/weather?city=${encodeURIComponent(searchQuery)}`);
+      router.push(`/weather?city=${encodeURIComponent(query)}`);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center px-4">
       <div className="text-center space-y-8 max-w-3xl w-full">
-        <h2 className="text-white text-2xl font-light text-balance mb-5">
+        <h2 className="text-white text-2xl font-light mb-5">
           How's the sky looking today?
         </h2>
 
-        <div className="flex items-center space-x-3 w-full mx-auto">
+        <div className="flex items-center space-x-3 w-full mx-auto relative">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-5" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-5" />
             <Input
               type="text"
               placeholder="Search for a place..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                fetchSuggestions(e.target.value);
+              }}
               className="bg-black/20 border-white/20 text-white placeholder:text-white/60 rounded-lg h-12 pl-10 pr-4"
             />
+
+            {/* Suggestions dropdown */}
+            {suggestions.length > 0 && (
+              <ul className="absolute mt-1 w-full bg-white rounded-lg shadow-lg z-50 text-left max-h-60 overflow-y-auto">
+                {suggestions.map((city, idx) => (
+                  <li
+                    key={idx}
+                    onClick={() => {
+                      setSearchQuery(city.name);
+                      handleSearch(city.name);
+                    }}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  >
+                    {city.name}, {city.state ? `${city.state}, ` : ""}
+                    {city.country}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
           <Button
-            onClick={handleSearch}
+            onClick={() => handleSearch()}
             disabled={loading}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 h-12 rounded-lg font-medium"
           >

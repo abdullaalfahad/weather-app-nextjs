@@ -66,10 +66,7 @@ export async function getWeatherData(query: string): Promise<{
       forecast = dailyForecasts;
 
       hourlyForecast = forecastData.list.slice(0, 8).map((item: any) => ({
-        time: new Date(item.dt * 1000).toLocaleTimeString("en", {
-          hour: "numeric",
-          hour12: false,
-        }),
+        time: new Date(item.dt * 1000).toISOString(),
         temperature: Math.round(item.main.temp),
         icon: item.weather[0].icon,
       }));

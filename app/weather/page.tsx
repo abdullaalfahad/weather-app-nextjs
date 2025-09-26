@@ -5,6 +5,7 @@ import { DailyForecast } from "@/components/daily-forcast";
 import { ForecastDay, WeatherData } from "@/types/weather";
 import { HourlyForecast } from "@/components/hourly-forcast";
 import { WeatherSearch } from "@/components/weather-search";
+import type { HourlyForecast as HourlyForecastType } from "@/types/weather";
 
 interface WeatherPageProps {
   searchParams: Promise<{ city: string }>;
@@ -19,8 +20,7 @@ export default async function WeatherPage({ searchParams }: WeatherPageProps) {
 
   let weatherData: WeatherData | undefined = undefined;
   let forecast: ForecastDay[] = [];
-  let hourlyForecast: any = null;
-  let error: string | undefined;
+  let hourlyForecast: HourlyForecastType[] | undefined = undefined;
 
   try {
     const data = await getWeatherData(city);
@@ -28,7 +28,7 @@ export default async function WeatherPage({ searchParams }: WeatherPageProps) {
     forecast = data.forecast;
     hourlyForecast = data.hourlyForecast;
   } catch (err) {
-    error = err instanceof Error ? err.message : "An error occurred";
+    console.log(err);
   }
 
   return (
@@ -41,7 +41,7 @@ export default async function WeatherPage({ searchParams }: WeatherPageProps) {
             {forecast?.length > 0 && <DailyForecast forecast={forecast} />}
           </div>
 
-          {hourlyForecast.length > 0 && (
+          {hourlyForecast && hourlyForecast.length > 0 && (
             <div>
               <HourlyForecast hourlyForecast={hourlyForecast} />
             </div>

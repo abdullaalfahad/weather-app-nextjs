@@ -3,6 +3,8 @@ import { getWeatherData } from "@/lib/weather-api";
 import { WeatherCard } from "@/components/weather-card";
 import { DailyForecast } from "@/components/daily-forcast";
 import { ForecastDay, WeatherData } from "@/types/weather";
+import { HourlyForecast } from "@/components/hourly-forcast";
+import { WeatherSearch } from "@/components/weather-search";
 
 interface WeatherPageProps {
   searchParams: Promise<{ city: string }>;
@@ -30,13 +32,20 @@ export default async function WeatherPage({ searchParams }: WeatherPageProps) {
   }
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div>
+      <WeatherSearch />
       {weatherData ? (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10">
           <div className="lg:col-span-2 space-y-6">
             <WeatherCard weatherData={weatherData} />
             {forecast?.length > 0 && <DailyForecast forecast={forecast} />}
           </div>
+
+          {hourlyForecast.length > 0 && (
+            <div>
+              <HourlyForecast hourlyForecast={hourlyForecast} />
+            </div>
+          )}
         </div>
       ) : null}
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,8 @@ export function WeatherSearch() {
   const [searchQuery, setSearchQuery] = useState("");
   const { loading, error, searchWeather } = useWeatherSearch();
   const router = useRouter();
+
+  const pathName = usePathname();
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
@@ -51,7 +53,7 @@ export function WeatherSearch() {
 
         {error && <p className="text-red-300 text-sm">{error}</p>}
 
-        {!error && (
+        {!error && pathName === "/" && (
           <div className="pt-16">
             <Search className="w-12 h-12 text-black mx-auto mb-4" />
             <p className="text-white/60 text-center text-sm">

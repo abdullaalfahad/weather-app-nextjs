@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌦 Weather App (Next.js)
 
-## Getting Started
+A responsive weather application built with **Next.js 15**, **React 19**, **TailwindCSS**, and **Biome**.  
+It fetches real-time weather data from the **OpenWeatherMap API** and displays current, hourly, and 7-day forecasts.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🔍 **City Search** – Search weather by city name with autocomplete support
+- 🌡 **Current Weather** – Temperature, condition, city & country, current date
+- 📊 **Weather Statistics** – Feels like, humidity, wind speed, precipitation/pressure
+- 📅 **Forecasts** – 7-day forecast (high/low temps, icons) and hourly forecast (8+ hours)
+- 🎨 **Responsive UI** – Works seamlessly on mobile and desktop
+- ⚡ **Fast Build** – Uses Next.js **Turbopack**
+- 🛠 **Developer Tools** – Code formatting and linting with **Biome**
+
+---
+
+## 📸 Design Reference
+
+This project follows the provided Figma design:  
+👉 [Figma Link](https://www.figma.com/design/kYIFVoln5iuxQqWZQDoy6F/weather-app?node-id=156-791&t=XyZL0MQEa5GEexbQ-1)
+
+---
+
+## 🚀 Tech Stack
+
+- [Next.js 15](https://nextjs.org/) (with Turbopack)
+- [React 19](https://react.dev/)
+- [TailwindCSS 4](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+- [Biome](https://biomejs.dev/) (linting & formatting)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+
+---
+
+## ⚙️ Installation & Setup
+
+Clone the repo:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/weather-app-nextjs.git
+cd weather-app-nextjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install dependencies with **pnpm**:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root directory and add your OpenWeather API key:
 
-## Learn More
+```env
+NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏃 Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the app in development mode:
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Build for production:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm build
+```
+
+Start the production server:
+
+```bash
+pnpm start
+```
+
+---
+
+## 🧹 Code Quality
+
+Format code:
+
+```bash
+pnpm format
+```
+
+Lint code:
+
+```bash
+pnpm lint
+```
+
+---
+
+## 🌍 Deployment
+
+This app can be easily deployed to **Vercel** (recommended) or other platforms like DigitalOcean, AWS, or Railway.
+
+For Vercel:
+
+1. Push your code to GitHub.
+2. Import your repo into [Vercel](https://vercel.com/).
+3. Add your environment variables.
+4. Deploy 🎉
+
+---
+
+## 📂 Project Structure
+
+```
+weather-app-nextjs/
+├── app/               # Next.js App Router
+├── components/        # Reusable UI components
+├── hooks/             # Custom React hooks
+├── public/            # Static assets
+├── styles/            # Tailwind / global styles
+├── types/             # TypeScript types
+├── .env.local         # Environment variables
+├── package.json
+├── pnpm-lock.yaml
+└── README.md
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.

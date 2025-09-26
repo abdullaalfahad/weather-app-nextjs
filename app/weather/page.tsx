@@ -20,7 +20,7 @@ export default async function WeatherPage({ searchParams }: WeatherPageProps) {
 
   let weatherData: WeatherData | undefined = undefined;
   let forecast: ForecastDay[] = [];
-  let hourlyForecast: HourlyForecastType[] | undefined = undefined;
+  let hourlyForecast: HourlyForecastType[] = [];
 
   try {
     const data = await getWeatherData(city);
@@ -28,6 +28,9 @@ export default async function WeatherPage({ searchParams }: WeatherPageProps) {
     forecast = data.forecast;
     hourlyForecast = data.hourlyForecast;
   } catch (err) {
+    weatherData = undefined;
+    forecast = [];
+    hourlyForecast = [];
     console.log(err);
   }
 

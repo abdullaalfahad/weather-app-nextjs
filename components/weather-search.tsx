@@ -25,6 +25,8 @@ export function WeatherSearch() {
 
     if (data) {
       router.push(`/weather?city=${encodeURIComponent(query)}`);
+    } else if (pathName !== "/" && !data) {
+      router.push(`/weather?city=${encodeURIComponent(query)}`);
     }
   };
 
